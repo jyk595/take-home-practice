@@ -5,7 +5,7 @@ import CommentForm from './Components/CommentForm';
 import CommentContainer from './Components/CommentContainer';
 
 function App() {
-  const [commentList, setCommentList] = useState([]);
+  const [commentList, setCommentList] = useState(false);
 
   useEffect(()=>{
     fetch(`http://localhost:3001/getComments`)

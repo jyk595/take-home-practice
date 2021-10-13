@@ -18,9 +18,9 @@ comment.createTable().catch(error => {
   console.log(`Error: ${JSON.stringify(error)}`);
 });
 
-comment.createComment({name:"namename", message:"lorem ipsum"});
+// comment.createComment({name:"namename", message:"lorem ipsum"});
 
-comment.getComments().then(result=>console.log({ result }))
+// comment.getComments().then(result=>console.log({ result }))
 
 app.post('/createComment', function(request, response) {
   const { body } = request;

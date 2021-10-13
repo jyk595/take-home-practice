@@ -25,16 +25,19 @@ function CommentForm({ setCommentList }) {
     if (response.ok) {
       response.json()
       .then(comment=>{
-        console.log(comment)
+        fetch(`http://localhost:3001/getComment?id=${comment.id}`)
+        .then(res=>res.json())
+        .then(data=>{
+          setCommentList((commentList)=>([
+            data,
+            ...commentList
+          ]))
+        });
 
-        // setCommentList((commentList)=>([
-        //   comment,
-        //   ...commentList
-        // ]))
         setFormData({
           name: "",
           message: ""
-        })
+        });
       })
     } else {
       response.json()
@@ -44,13 +47,16 @@ function CommentForm({ setCommentList }) {
 
   return(
     <form
+      className="form-container"
       onSubmit={submitCommentForm}
     >
+      <h2>Add a comment</h2>
       <div
-        className="form-container"
+        className="form-section-container"
       >
         <label
           htmlFor="name"
+          className="form-label"
         >
           Name
         </label>
@@ -59,16 +65,18 @@ function CommentForm({ setCommentList }) {
           name="name"
           placeholder="Your name"
           value={formData.name}
+          className="form-input"
           required
           onChange={changeCommentForm}
         />
       </div>
       
       <div
-        className="form-container"
+        className="form-section-container"
       >
         <label
           htmlFor="message"
+          className="form-label"
         >
           Message
         </label>
@@ -77,6 +85,7 @@ function CommentForm({ setCommentList }) {
           name="message"
           placeholder="Your message here"
           value={formData.message}
+          className="form-input-text"
           required
           onChange={changeCommentForm}
         />
@@ -84,7 +93,8 @@ function CommentForm({ setCommentList }) {
 
       <input 
         type="submit"
-        value="Submit Comment"
+        value="Comment"
+        className="submit-button"
       />
     </form>
   )
